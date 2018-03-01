@@ -26,7 +26,10 @@ createHandler()
 function selectDisk(event) {
     let thisDisk = event.target;
     let idNum = thisDisk.id;
-    tempDisk = thisDisk;
+    if (idNum == thisDisk.parentElement.lastElementChild.id){
+        thisDisk.classList.add("border");
+        tempDisk = thisDisk;
+    }
     console.log(tempDisk)
 }
 
@@ -34,14 +37,13 @@ function placeDisk(event) {
     let thisButton = event.target;
     let parent = thisButton.parentElement;
     tempId = tempDisk.id;
+    tempDisk.classList.remove("border");
     let topDisk = parent.lastElementChild.id;
-    if (tempId == 1) {
-        parent.appendChild(tempDisk);
-    } else if (tempId < topDisk || topDisk == false){
+    if (tempId < topDisk || topDisk == false) {
         parent.appendChild(tempDisk);
     }
 
-    if (rod3.childElementCount == 5){
+    if (rod3.childElementCount == 5) {
         alert("You win!");
     }
 }
