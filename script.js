@@ -2,7 +2,10 @@ let tempDisk;
 let rod3 = document.getElementById("rod3")
 var main = document.querySelector("main");
 
+// Click event for choices.
+var columns = document.querySelectorAll("button");
 
+// Creates all discs for board
 function createDisks() {
     var destination = document.getElementById("rod1");
     for (i = 4; i > 0; i--) {
@@ -14,6 +17,7 @@ function createDisks() {
 }
 createDisks();
 
+// Assigns a click handler for each disk
 function createHandler() {
     var disks = document.getElementsByClassName("disk")
     for (let i = 0; i < disks.length; i++) {
@@ -23,35 +27,37 @@ function createHandler() {
 }
 createHandler()
 
+// Allows each disk to be clickable to enable selection
 function selectDisk(event) {
     let thisDisk = event.target;
     let idNum = thisDisk.id;
     if (idNum == thisDisk.parentElement.lastElementChild.id){
-        thisDisk.classList.add("border");
         tempDisk = thisDisk;
     }
-    console.log(tempDisk)
 }
 
+// After the selection of disk, placeDisk moves the disk to the correct rod
 function placeDisk(event) {
     let thisButton = event.target;
     let parent = thisButton.parentElement;
     tempId = tempDisk.id;
-    tempDisk.classList.remove("border");
     let topDisk = parent.lastElementChild.id;
-    if (tempId < topDisk || topDisk == false) {
-        parent.appendChild(tempDisk);
+    if (parent.className == "column") {
+        if (tempId < topDisk || topDisk == false) {
+            parent.appendChild(tempDisk);
+        }
     }
-
     if (rod3.childElementCount == 5) {
         alert("You win!");
     }
 }
 
-// Click event for choices.
-var columns = document.querySelectorAll("button");
-
 for (let i = 0; i < columns.length; i++) {
     let column = columns[i];
     column.addEventListener('click', placeDisk);
 }
+
+// Resets by reloading page
+document.getElementById("reset").addEventListener("click", (event) => {
+    window.location.reload()
+})
