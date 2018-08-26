@@ -1,10 +1,3 @@
-let tempDisk;
-let rod3 = document.getElementById("rod3")
-var main = document.querySelector("main");
-
-// Click event for choices.
-var columns = document.querySelectorAll("button");
-
 // Creates all discs for board
 function createDisks() {
     var destination = document.getElementById("rod1");
@@ -28,6 +21,7 @@ function createHandler() {
 createHandler()
 
 // Allows each disk to be clickable to enable selection
+let tempDisk;
 function selectDisk(event) {
     let thisDisk = event.target;
     let idNum = thisDisk.id;
@@ -35,6 +29,7 @@ function selectDisk(event) {
         tempDisk = thisDisk;
     }
 }
+
 
 // After the selection of disk, placeDisk moves the disk to the correct rod
 function placeDisk(event) {
@@ -51,6 +46,9 @@ function placeDisk(event) {
         alert("You win!");
     }
 }
+
+// Click event for choices.
+let columns = document.querySelectorAll(".button");
 
 for (let i = 0; i < columns.length; i++) {
     let column = columns[i];
